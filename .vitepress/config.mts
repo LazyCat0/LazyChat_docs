@@ -6,7 +6,7 @@ export default defineConfig({
   
   title: "LazyChat - Documentation",
   description: "LazyChat docs",
-  base: "/LazyChat-docs/",
+  base: "/LazyChat_docs/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
