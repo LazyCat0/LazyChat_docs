@@ -1,0 +1,16 @@
+name: Deploy Site
+on:
+  push:
+    branches: [master] # или main, если у вас ветка называется main
+permissions:
+  pages: write
+  id-token: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.vitepress/dist'
+      - uses: actions/deploy-pages@v4
