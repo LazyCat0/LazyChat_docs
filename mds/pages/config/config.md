@@ -1,0 +1,95 @@
+# Configuration {#Config}
+## `config.yml`{#config.yml}
+Inside this file, you can find... Configuration for plugin? XD  
+```yml
+config-version: 5 # DO NOT CHANGE
+
+#  @      @@@  @@@@@ @   @  @@@  @   @  @@@  @@@@@            @   @  @@@  @@@@  @@@@@ @@@@  @   @
+#  @     @   @    @   @ @  @     @   @ @   @   @              @@ @@ @   @ @   @ @     @   @ @@  @
+#  @     @@@@@   @     @   @     @@@@@ @@@@@   @      @@@@    @ @ @ @   @ @   @ @@@@  @@@@  @ @ @
+#  @     @   @  @      @   @     @   @ @   @   @              @   @ @   @ @   @ @     @  @  @  @@
+#  @@@@@ @   @ @@@@@   @    @@@  @   @ @   @   @              @   @  @@@  @@@@  @@@@@ @   @ @   @
+
+options:
+  language: English # Available: English, Russian, Ukrainian
+  enable-logging: true # Enables logging to console.
+  default: local # Chat that will be used by default
+
+  # Enables some experiments like .json for chats or databases for mutes.
+  experiments:
+    jsonForChats: false
+    databasesForMute: false
+
+# ...other sections...
+```
+## `options` section.{#config.yml/options}
+```yml
+options:
+  language: English # Available: English, Russian, Ukrainian
+  enable-logging: true # Enables logging to console.
+  default: local # Chat that will be used by default
+
+  # Enables some experiments like .json for chats or databases for mutes.
+  experiments:
+    jsonForChats: false
+    databasesForMute: false
+```
+Here, we can found options for language, logging and default chat. Also, here you can see experiments. We return to this sub-section later.  
+* `language` - Allows to change language for plugin.
+* `enable-logging` - Enables logging of EVERY chat to console.
+* `default` - chat, that will be used by default.
+## `chats` section.{#config.yml/chats}
+Here you can change or add chats and settings. As example, we use global, and admin chats.
+```yml
+# ... other sections ...
+chats:
+  global:
+    template: "global.yml" # Template for global chat. You can use formats like json (WIP)
+    prefix: "!" # Prefix for use global chat. By default, and most popular — "!".
+    radius: -1 # If -1 or 0 — global.
+    perm: "" # If not set or just empty, will allow everyone to use this chat
+  local:
+    template: "local.yml" # Template for local chat.
+    prefix: "" # Not set cause isn't need.
+    radius: 100
+  whisper:
+    template: "whisper.yml"
+    prefix: ["*", "_", "~"] # Supports aliases
+    radius: 10
+    perm: "" # If not set or just empty, will allow everyone to use this chat
+  # Example chat with perms - Admin chat.
+  #admin:
+  #  template: "admin.yml"
+   # prefix: [":", "^"]
+   # perm: "lazychat.admin" # Able for set perm for chat. If not set, perm will be = none.
+    # If player do not have perm — He cannot read and send messages in this chat. If he try — in chat will send only text with prefix that DO NOT work.
+  # Example chat - Business chat.
+  #business:
+  #  template: "business.json"
+  #  prefix: ["$", ";"]
+
+# ... other sections ...
+```
+### global{#config.yml/chats/global}
+* `template` - Plugin uses "templates" system, that allows to better manage chats. Requres to set file name from `/templates` folder inside plugin folder
+* `prefix` - symbol/word that allows to use chat. In this case
+* `radius` - radius (in blocks), on that your message will sent. In this case - `-1`, will sent message to global chat.
+### whisper{#config.yml/chats/whisper}
+* `prefix` - also, you can make aliases (or list of variations of prefix)
+### admin{#config.yml/chats/admin}
+* `perm` - permission, that will allows to use chat. If not set - everyone can use this chat. Else, they need to have special permission. Recomended to restart server after change this parametr
+## `blacklist` section{#config.yml/blacklist}
+In this section you can made global blacklist. Like dissallow colors or specify tags. Also, you can disable using MM for dm's, signs or for whisper.
+```yml
+# ... other sections
+blacklist:
+  chat:
+    colors: false # Disables able for players for use colors. By default, colors enabled (or on false).
+    gradients: false # Disables able for players for use gradients. By default, gradients enabled (or on false).
+    tags: # Disables custom (and not only) tags.
+      - newline
+      - obf
+  signs: false # Disables able for players for use MiniMessage on signs. By default, enabled (or on false).
+  dm: false # Disables able for players for use MiniMessage in direct messages. By default, enabled (or on false).
+  whisper: false # Disables able for players for use whisper. By default, enabled (or on false).
+```
